@@ -1,0 +1,88 @@
+{% extends 'dashboard.html' %}
+
+{% block conteudo %}
+    <div class="main" id="main">
+      <header>
+        <span class="menu-toggle" id="menu-toggle">&#9776;</span>
+        <div class="dropdown user-info">
+            <button class="btn bg-white dropdown-toggle d-flex align-items-center" id="dropdownUser" data-bs-toggle="dropdown" aria-expanded="false">
+                <span class="icon me-2">👤</span>  {{ usuario().nome }}
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownUser">
+                <li>
+                    <a class="dropdown-item" href="#" tooltip="tooltip" title="Perfil">Perfil</a>
+                </li>
+                <li><hr class="dropdown-divider"></li>
+                <li>
+                    <a class="dropdown-item text-danger" tooltip="tooltip" href="{{ url('blog/admin/sair') }}" title="Sair do Sistema">Sair</a>
+                </li>
+            </ul>
+        </div>
+      </header>
+
+      {{ flash() }}
+
+      <section class="content">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+              <li class="breadcrumb-item">
+                  <a id="nav_a" href="{{url('blog/admin/dashboard')}}">
+                      Home
+                  </a>
+              </li>
+              <li id="nav_li" class="breadcrumb-item active" aria-current="page">
+                  Posts
+              </li>
+          </ol>
+        </nav>
+
+        <div class="card border-0 shadow-sm">
+            <div class="card-header bg-white border-0 d-flex justify-content-between align-items-center">
+              <div class="card-header bg-white border-0">
+                <span class="badge text-bg-secondary">{{total.total}} Posts</span>
+                <span class="badge text-bg-success">{{total.ativo}} Ativos</span>
+                <span class="badge text-bg-danger">{{total.inativo}} Inativos</span>
+              </div>
+              <a href="{{url('/blog/admin/posts/cadastrar')}}" id="btn_cadastrar" class="btn btn-primary">Cadastrar</a>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead> 
+                          <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Título</th>
+                            <th scope="col">Texto</th>
+                            <th scope="col">Status</th>
+                            <th class="acao" scope="col">Ação</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                            {% for post in posts %}
+                                <tr>
+                                    <th scope="row">{{post.id}}</th>
+                                    <td>{{post.titulo}}</td>
+                                    <td>{{resumirTexto(post.texto, 150)}}</td>
+                                    <td>
+                                        {% if post.status == 1 %}
+                                            <span class="badge bg-success">Ativo</span>
+                                        {% else %}
+                                            <span class="badge bg-danger">Inativo</span>
+                                        {% endif %}
+                                    </td>
+                                    <td class="acao">
+                                      <a class="editar" href="{{url('blog/admin/posts/editar/'~post.id)}}"><img src="/templates/dashboard/assets/img/editar.svg" alt=""></a>
+                                      <a class="deletar" href="{{url('blog/admin/posts/deletar/'~post.id)}}"><img src="/templates/dashboard/assets/img/lixeira.svg" alt=""></a>
+                                      <img src="" alt="">
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                          
+                        </tbody>
+                      </table>
+                </div>
+            </div>
+        </div>
+      </section>
+    </div>
+{% endblock %}

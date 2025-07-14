@@ -1,0 +1,103 @@
+{% extends 'dashboard.html' %}
+
+{% block conteudo %}
+    <div class="main" id="main">
+      <header>
+        <span class="menu-toggle" id="menu-toggle">&#9776;</span>
+        <div class="dropdown user-info">
+            <button class="btn bg-white dropdown-toggle d-flex align-items-center" id="dropdownUser" data-bs-toggle="dropdown" aria-expanded="false">
+                <span class="icon me-2">👤</span>  {{ usuario().nome }}
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownUser">
+                <li>
+                    <a class="dropdown-item" href="#" tooltip="tooltip" title="Perfil">Perfil</a>
+                </li>
+                <li><hr class="dropdown-divider"></li>
+                <li>
+                    <a class="dropdown-item text-danger" tooltip="tooltip" href="{{ url('blog/admin/sair') }}" title="Sair do Sistema">Sair</a>
+                </li>
+            </ul>
+        </div>
+      </header>
+
+      <section class="content">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+              <li class="breadcrumb-item">
+                  <a id="nav_a" href="{{url('blog/admin/dashboard')}}">
+                      Home
+                  </a>
+              </li>
+              <li id="nav_li" class="breadcrumb-item active" aria-current="page">
+                  Usuários
+              </li>
+          </ol>
+        </nav>
+
+        {{ flash() }}
+
+        <div class="card border-0 shadow-sm">
+            <div class="card-header bg-white border-0 d-flex justify-content-between align-items-center">
+              <div>
+                <span class="badge rounded text-bg-dark bg-opacity-25">
+                  <span class="text-dark bg-opacity-100">{{total.usuarios}} Usuário</span>
+                  <span class="badge text-bg-success bg-opacity-100">{{total.usuariosAtivo}}</span>
+                  <span class="badge text-bg-danger bg-opacity-100">{{total.usuariosInativo}}</span>
+                </span>
+                <span class="badge rounded text-bg-dark bg-opacity-25">
+                  <span class="text-dark bg-opacity-100">{{total.admin}} Admin</span>
+                  <span class="badge text-bg-success bg-opacity-100">{{total.adminAtivo}}</span>
+                  <span class="badge text-bg-danger bg-opacity-100">{{total.adminInativo}}</span>
+                </span>
+              </div>
+              <a title="Cadastrar Usuário" href="{{url('/blog/admin/usuarios/cadastrar')}}" id="btn_cadastrar" class="btn btn-dark" tooltip="tooltip">Cadastrar</a>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead> 
+                          <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Nome</th>
+                            <th scope="col">Email</th>
+                            <th class="text-center" scope="col">Level</th>
+                            <th class="text-center" scope="col">Status</th>
+                            <th class="text-center" class="acao" scope="col">Ação</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                            {% for usuario in usuarios %}
+                                <tr>
+                                    <th>{{usuario.id}}</th>
+                                    <td>{{usuario.nome}}</td>
+                                    <td>{{usuario.email}}</td>
+                                    <td class="text-center">
+                                      {% if usuario.level == 'Admin' %}
+                                        <div class="text-danger fw-bold">Admin</div>
+                                      {% else %}
+                                        <div class="text-secondary">Usuário</div>
+                                      {% endif %}
+                                    </td>
+                                    <td class="text-center">
+                                        {% if usuario.status == 1 %}
+                                            <i class="fa-solid fa-circle text-success"></i>
+                                        {% else %}
+                                            <i class="fa-solid fa-circle text-danger"></i>
+                                        {% endif %}
+                                    </td>
+                                    <td class="acao">
+                                      <a class="editar" href="{{url('blog/admin/usuarios/editar/'~usuario.id)}}"><img src="/templates/dashboard/assets/img/editar.svg" alt=""></a>
+                                      <a class="deletar" href="{{url('blog/admin/usuarios/deletar/'~usuario.id)}}"><img src="/templates/dashboard/assets/img/lixeira.svg" alt=""></a>
+                                      <img src="" alt="">
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                          
+                        </tbody>
+                      </table>
+                </div>
+            </div>
+        </div>
+      </section>
+    </div>
+{% endblock %}

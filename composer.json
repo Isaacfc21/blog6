@@ -1,0 +1,27 @@
+{
+    "name": "isaac/irondev",
+    "description": "Projeto Blog",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "sistema\\": "sistema/"
+        },
+         "files": [
+            "sistema/configuracao.php"
+        ]
+    },
+    "authors": [
+        {
+            "name": "Isaac Caraça",
+            "email": "isaaccaracayahoo@gmail.com",
+            "homepage": "https://www.naderman.de",
+            "role": "Developer"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=8.0",
+        "pecee/simple-router": "dev-master",
+        "twig/twig": "^3.0"
+    }
+}

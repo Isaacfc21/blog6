@@ -1,0 +1,30 @@
+<div class="sidebar" id="sidebar">
+  <div class="logo">
+    <a href="{{url('blog/admin/dashboard')}}"><img src="/templates/dashboard/assets/img/php logo.png" width="60" height="60" alt=""></a>
+  </div>
+  <div class="sidebar-menu">
+    <ul>
+      <li>
+        {% if usuario().level == 'Admin' %}
+        <a href="{{url('blog/admin/posts/listar')}}">
+          <i class="fa-solid fa-file-pen"></i>
+          <span>Posts</span>
+        </a>
+        {% endif %}
+      </li>
+      <li>
+        <a href="{{url('blog/admin/categorias/listar')}}">
+          <i class="fa-solid fa-list"></i>
+          <span>Categorias</span>
+        </a>
+      </li>
+      <li>
+        <a href="{{url('blog/admin/usuarios/listar')}}">
+          <i class="fa-solid fa-users"></i>
+          <span>Usuários</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>
+      

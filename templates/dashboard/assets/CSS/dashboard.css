@@ -1,0 +1,167 @@
+:root{
+    --sidebar-width: 250px;
+    --sidebar-collapsed: 70px;
+    --header-collapsed: 70px;
+    --main-color: #2f3e58;
+    --text-color: #ecf0f1;
+    --transition: 0.3s ease;
+} 
+
+  
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    font-family: Arial, sans-serif;
+    display: flex;
+    background: #f3f4f7;
+}
+
+/* Sidebar */
+.sidebar{
+    position: fixed;
+    width: 250px; /* ou 345px, se preferir */
+    height: 100%;
+    background: var(--main-color);
+    left: 0;
+    top: 0;
+    z-index: 100;
+    transition: width 0.3s; /* ADICIONE ESTA LINHA */
+}
+  
+
+.sidebar.collapsed{
+    width: var(--sidebar-collapsed);
+}
+
+.logo{
+    padding: 20px;
+    text-align: center;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.sidebar-menu ul{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar-menu ul li a{
+    display: block;
+    padding: 15px 20px;
+    text-decoration: none;
+    color: var(--text-color);
+    transition: background 0.2s;
+}
+
+.sidebar-menu ul li a:hover{
+    background: #3f5070;
+}
+
+/* Main content */
+.main{
+    margin-left: var(--sidebar-width);
+    flex: 1;
+    transition: margin-left var(--transition);
+}
+  
+.main.collapsed{
+    margin-left: var(--sidebar-collapsed);
+}
+  
+
+/* Header */
+header{
+    background: #fff;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+    width: 100%; /* ← aqui! */
+    transition: var(--transition); /* ← também adicione essa linha */
+}
+  
+
+.menu-toggle{
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.user-info{
+    font-size: 16px;
+}
+
+/* Content */
+.content{
+    padding: 20px;
+    transition: var(--transition);
+}
+  
+.sidebar.collapsed {
+    width: 90px;
+}
+
+.sidebar.collapsed .sidebar-menu span {
+    display: none;
+}
+
+#nav_li{
+    text-decoration: none;
+}
+#nav_a{
+    text-decoration: none;
+    color: #000;
+}
+.editar{
+    text-decoration: none;
+    color: #000;
+}
+.acao {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+.acao a{
+    padding: 5px 10px;
+    text-decoration: none;
+    color: white;
+    border-radius: 5px;
+    font-size: 14px;
+}
+table th, table td{
+    text-align: left;
+    vertical-align: middle;
+    padding: 12px 15px;
+}
+  
+
+
+/* #overlay{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.7); 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9998;
+}  */
+
+/* #formulario{
+  background-color: white;
+  padding: 30px;
+  border-radius: 8px;
+  z-index: 9999;
+  max-width: 500px;
+  width: 90%;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+} */
+ 
+  
