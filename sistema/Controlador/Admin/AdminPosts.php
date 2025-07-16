@@ -39,6 +39,7 @@ class AdminPosts extends AdminControlador
 
                 $post->titulo = $dados['titulo'];
                 $post->categoria_id = $dados['categoria_id'];
+                $post->slug = Helpers_c::slug($dados['titulo']);
                 $post->texto = $dados['texto'];
                 $post->status = $dados['status'];
                 $post->cadastrado_em = date('Y-m-d H:i:s');

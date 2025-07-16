@@ -8,8 +8,12 @@
         
         <div class="row">
             <h1>{{post.titulo}}</h1>
-            <hr>
-            <p>{{post.texto}}</p>
+            <div class="my-3">
+                <small class="text-muted">Por {{post.usuario.nome}}, {{ post.cadastrado_em|date("d/m/Y") }} às {{ post.cadastrado_em|date("H:i") }} em {{post.categoria.titulo}}</small>
+            </div>
+            <div class="texto">
+                <p>{{post.texto}}</p>
+            </div>
         </div>
         
         </div>

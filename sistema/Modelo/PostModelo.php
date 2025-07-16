@@ -24,6 +24,19 @@ class PostModelo extends Modelo
 
         return null;
     }
+    public function usuario(): ?UsuarioModelo
+    {
+        if($this->usuario_id){
+            return (new UsuarioModelo())->buscaporID($this->usuario_id);
+        }
+
+        return null;
+    }
+    public function salvar(): bool
+    {
+        $this->slug();
+        return parent::salvar();
+    }
     // public function busca(?string $termo = null, ?string $ordem = null):array
     // {
     //     $termo =  ($termo ? "WHERE {$termo}" : '');

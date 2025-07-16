@@ -36,6 +36,7 @@ class AdminCategorias extends AdminControlador
                 $categoria  = new CategoriaModelo();
 
                 $categoria->titulo = $dados['titulo'];
+                $categoria->slug = Helpers_c::slug($dados['titulo']);
                 $categoria->texto = $dados['texto'];
                 $categoria->status = $dados['status'];
                 $categoria->cadastrado_em = date('Y-m-d H:i:s');

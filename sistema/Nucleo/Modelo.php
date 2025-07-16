@@ -154,7 +154,7 @@ abstract class Modelo
             echo $this->erro = $ex;
             return null;
         }
-    }
+    } 
 
     private function filtro(array $dados): array
     {
@@ -176,6 +176,12 @@ abstract class Modelo
     public function buscaPorId(int $id)
     {
         $busca = $this->busca("id = {$id}");
+        return $busca->resultado();
+    }
+    
+    public function buscaPorSlug(string $slug)
+    {
+        $busca = $this->busca("slug = :s", "s={$slug}");
         return $busca->resultado();
     }
 
@@ -254,6 +260,20 @@ abstract class Modelo
 
         return true;
     }
+
+    private function ultimoId():int
+    {
+        return Conexao::getInstancia()->query("SELECT MAX(id) as maximo FROM {$this->tabela}")->fetch()->maximo +1;
+    }
+
+    protected function slug()
+    {
+        $checarSlug = $this->busca("slug = :s AND id != :id", "s={$this->slug}&id={$this->id}");
+        if($checarSlug->total()){
+            $this->slug = "{$this->slug}-{$this->ultimoId()}"; 
+        }
+    }
+
 }
 
 ?>

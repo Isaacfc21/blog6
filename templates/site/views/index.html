@@ -12,11 +12,11 @@
             <div class="col-md-6 mb-4">
                 <div class="card h-100">
                     <div class="card-body">
-                        <a href="{{url('/blog/post/'~post.id)}}" tooltip="tooltip" title="{{post.titulo}}">
+                        <a class="tirar_decorate" href="{{url('/blog/post/'~post.slug~'/'~post.id)}}" tooltip="tooltip" title="{{post.titulo}}">
                             <h5 class="card-title">{{post.titulo}}</h5>
                             <div class="d-flex justify-content-between my -3 text-muted">
-                                <small>{{post.categoria.titulo}}</small>
-                                <small>00/00/0000</small>
+                                <small>{{post.categoria.titulo |upper}} </small>
+                                <small>{{contarTempo(post.cadastrado_em)}}</small>
                             </div>
                             <p class="card-text">{{resumirTexto(post.texto, 150)}}</p>
                         </a>

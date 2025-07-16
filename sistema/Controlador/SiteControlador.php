@@ -44,26 +44,32 @@ class SiteControlador extends Controlador
             'titulo' => 'Página não encontrada',
         ]);
     }
-    public function post(int $id):void
+    public function post(string $slug, int $id):void
     {
-        $post = (new PostModelo())->buscaporID($id);
+        $post = (new PostModelo())->buscaPorId($id);
+        // var_dump($post);
         if(!$post){
             Helpers_c::redirecionar(URL_SITE . '404');
         }
+
+        $post->visitas = $post->visitas + 1;
+        $post->ultima_visita_em = date('Y-m-d H:i:s');
+        $post->salvar();
+
         echo $this->template->renderizar('post.html', [
             'post' => $post,
             'categorias' => $this->categorias()
         ]);
     }
-    public function categoria(int $id):void
+    public function categoria(string $slug):void
     {
-        $posts = (new CategoriaModelo())->posts($id);
+        $categoria = (new CategoriaModelo())->buscaPorSlug($slug);
 
-        if(!$posts){
+        if(!$categoria){
             Helpers_c::redirecionar(URL_SITE . '404');
         }
         echo $this->template->renderizar('categoria.html', [
-            'posts' => $posts,
+            'posts' => (new CategoriaModelo())->posts($categoria->id),
             'categorias' => $this->categorias(),
         ]);
     }

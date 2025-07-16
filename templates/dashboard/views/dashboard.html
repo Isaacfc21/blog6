@@ -27,7 +27,7 @@
         <section class="content">
           <h5 class="mb-3 fw-bold">
             Dashboard
-            <small class="saudacao text-muted"> - Saudação, {{ usuario().nome }}. Seu último login foi em xx/xx/xxxx às 00:00</small>
+            <small class="saudacao text-muted"> - {{saudacao_switch()}}, {{ usuario().nome }}. Seu último login foi em {{usuario().ultimo_login |date('d/m/Y')}} às {{usuario().ultimo_login |date('H:i')}}</small>
           </h5>
 
           <div class="row">
@@ -129,10 +129,10 @@
                                 {{resumirTexto(post.titulo, 100)}}
                               </div>
                               <small class="text-muted fw-normal">
-                                Escrito por Autor há 35 minutos em Categoria
+                                Escrito por {{post.usuario.nome}} {{contarTempo(post.cadastrado_em)}} em {{post.categoria.titulo}}
                               </small>
                             </th>
-                            <td class="text-center">0</td>
+                            <td class="text-center">{{post.visitas}}</td>
                             <td class="text-center">
                               <a href="{{url('blog/admin/posts/editar/'~post.id)}}" tooltip="tooltip" title="Editar">
                                 <i class="fa-solid fa-pen m-1"></i>
