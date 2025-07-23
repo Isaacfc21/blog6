@@ -20,6 +20,16 @@
                             </div>
                             <p class="card-text">{{resumirTexto(post.texto, 150)}}</p>
                         </a>
+                        {% if usuario().level == 'Admin' %}
+                        <div class="card-footer border-0 bg-transparent text-secondary text-end">
+                            <a class="cor" href="{{url('blog/admin/categorias/editar/'~post.id)}}" tooltip="tooltip" title="Editar">
+                                <i class="fa-solid fa-pen m-1"></i>
+                            </a>
+                            <a class="cor" href="{{url('blog/admin/categorias/deletar/'~post.id)}}" tooltip="tooltip" title="Deletar">
+                                <i class="fa-solid fa-trash m-1"></i>
+                            </a>
+                        </div>
+                        {% endif %}
                     </div>
                 </div>
             </div>

@@ -274,6 +274,12 @@ abstract class Modelo
         }
     }
 
+    public function salvarVisitas()
+    {
+        $this->visitas +=1;
+        $this->ultima_visita_em = date('Y-');
+    }
+
 }
 
 ?>

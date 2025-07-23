@@ -46,8 +46,14 @@
             </div>
     
             <div class="text-end">
+              {% if usuario().level == 'Admin' %}
+              Admin Logado
+              {% elseif usuario().level == 'Usuario' %}
+              Usuário Logado
+              {% else %}
               <button type="button" class="btn btn-outline-light me-2">Entrar</button>
               <button type="button" class="btn btn-warning">Cadastre-se</button>
+              {% endif %}
             </div>
           </div>
         </div>

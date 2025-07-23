@@ -68,6 +68,11 @@ class SiteControlador extends Controlador
         if(!$categoria){
             Helpers_c::redirecionar(URL_SITE . '404');
         }
+
+        $categoria->visitas = $categoria->visitas + 1;
+        $categoria->ultima_visita_em = date('Y-m-d H:i:s');
+        $categoria->salvar();
+
         echo $this->template->renderizar('categoria.html', [
             'posts' => (new CategoriaModelo())->posts($categoria->id),
             'categorias' => $this->categorias(),
