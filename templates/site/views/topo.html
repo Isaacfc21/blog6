@@ -47,7 +47,20 @@
     
             <div class="text-end">
               {% if usuario().level == 'Admin' %}
-              Admin Logado
+              <div class="dropdown user-info">
+                <button class="btn bg-white dropdown-toggle d-flex align-items-center" id="dropdownUser" data-bs-toggle="dropdown" aria-expanded="false">
+                    <span class="icon me-2">👤</span>  {{ usuario().nome }}
+                </button>
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownUser">
+                    <li>
+                        <a class="dropdown-item" href="#" tooltip="tooltip" title="Perfil">Perfil</a>
+                    </li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li>
+                        <a class="dropdown-item text-danger" tooltip="tooltip" href="{{ url('blog/admin/sair') }}" title="Sair do Sistema">Sair</a>
+                    </li>
+                </ul>
+              </div>
               {% elseif usuario().level == 'Usuario' %}
               Usuário Logado
               {% else %}

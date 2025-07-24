@@ -276,8 +276,9 @@ abstract class Modelo
 
     public function salvarVisitas()
     {
-        $this->visitas +=1;
-        $this->ultima_visita_em = date('Y-');
+        $this->visitas += 1;
+        $this->ultima_visita_em = date('Y-m-d H:i:s');
+        $this->salvar();
     }
 
 }
