@@ -13,8 +13,8 @@
         // r($arquivo);
     }
 
-    $arquivo = $_FILES;
-    echo '<hr>';
+    // $arquivo = $_FILES;
+    // echo '<hr>';
     // echo $arquivo['arquivo']['name'];
     // var_dump($arquivo);
     // print_r($arquivo);

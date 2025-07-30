@@ -17,7 +17,7 @@ class Upload
     public $nome;
     public $pasta;
 
-    public function __construct(string $diretorio = null)
+    public function __construct(?string $diretorio = null)
     {
         $this->diretorio = $diretorio ?? 'uploads';
         if(!file_exists($this->diretorio) && !is_dir($this->diretorio)){
@@ -25,7 +25,7 @@ class Upload
         }
     }
 
-    public function arquivo(string $pasta = null)
+    public function arquivo(?string $pasta = null)
     {
         $this->pasta = $pasta ?? 'arquivos';
 
@@ -34,10 +34,13 @@ class Upload
 
     public function criarPasta(): void
     {
-        if (!file_exists($this->diretorio).DIRECTORY_SEPARATOR.$this->pasta && !is_dir($this->diretorio).DIRECTORY_SEPARATOR.$this->pasta) {
-            mkdir($this->diretorio.DIRECTORY_SEPARATOR.$this->pasta, 0755);
+        $caminhoCompleto = $this->diretorio . DIRECTORY_SEPARATOR . $this->pasta;
+
+        if (!file_exists($caminhoCompleto) && !is_dir($caminhoCompleto)) {
+            mkdir($caminhoCompleto, 0755);
         }
     }
+
 
 }
 
