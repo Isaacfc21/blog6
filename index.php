@@ -17,7 +17,7 @@
     // echo '<hr>';
     // echo $arquivo['arquivo']['name'];
     // var_dump($arquivo);
-    // print_r($arquivo);
+    // print_r($arquivo);fsg
 ?>  
 <form method="post" enctype="multipart/form-data">
     <input type="file" name="arquivo">
